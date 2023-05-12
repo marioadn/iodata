@@ -30,17 +30,20 @@ from ..periodic import num2sym
 
 __all__ = []
 
-
+#Modified by m-ADN 05-05-2023
 default_template = """\
-#n {lot}/{obasis_name} {run_type}
+%chk={chkname}
+%nproc={nproc}
+$mem={mem}
+#n {lot}/{obasis_name} {run_type} {exkeys}
 
 {title}
 
 {charge} {spinmult}
 {geometry}
 
+{codfunc}
 """
-
 
 @document_write_input("GAUSSIAN", ['atnums', 'atcoords'],
                       ['title', 'run_type', 'lot', 'obasis_name', 'spinmult', 'charge'])
@@ -48,6 +51,12 @@ def write_input(f: TextIO, data: IOData, template: str = None, **kwargs):
     """Do not edit this docstring. It will be overwritten."""
     # initialize a dictionary with fields to replace in the template
     fields = populate_fields(data)
+    #Add by m-ADN 05-05-2023
+    fields["chkname"] = data.chkname if data.chkname is not None else data.title
+    fields["nproc"] = data.nproc if data.nproc is not None else '12'
+    fields["mem"] = data.mem if data.mem is not None else '1GB'
+    fields["exkeys"] = data.exkeys if data.exkeys is not None else ''
+    fields["codfunc"] = data.codfunc if data.codfunc is not None else ''
     # set format-specific defaults
     fields["lot"] = data.lot if data.lot is not None else 'hf'
     fields["obasis_name"] = data.obasis_name if data.obasis_name is not None else 'sto-3g'
