@@ -228,6 +228,13 @@ class IOData:
     title: str = None
     two_ints: dict = {}
     two_rdms: dict = {}
+    #Add by m-ADN 05-05-23
+    chkname: str = None
+    nproc: str = None
+    mem: str = None
+    exkeys: str = None
+    codfunc: str = None
+
 
     def __attrs_post_init__(self):
         # Trigger setter to acchieve consistency in properties
