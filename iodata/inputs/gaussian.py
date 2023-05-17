@@ -30,11 +30,11 @@ from ..periodic import num2sym
 
 __all__ = []
 
-#Modified by m-ADN 05-05-2023
+#Modified by m-ADN 05-05-2023$
 default_template = """\
 %chk={chkname}
 %nproc={nproc}
-$mem={mem}
+%mem={mem}
 #n {lot}/{obasis_name} {run_type} {exkeys}
 
 {title}
